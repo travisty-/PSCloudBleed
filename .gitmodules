@@ -1,0 +1,3 @@
+[submodule "lib/sites-using-cloudflare"]
+	path = lib/sites-using-cloudflare
+	url = https://github.com/pirate/sites-using-cloudflare
