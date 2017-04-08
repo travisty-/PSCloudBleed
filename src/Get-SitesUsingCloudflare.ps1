@@ -50,7 +50,7 @@ function Get-SitesUsingCloudflare {
 .LINK
     https://blog.cloudflare.com/incident-report-on-memory-leak-caused-by-cloudflare-parser-bug/
 .NOTES
-    Many thanks to Nick Sweeting for taking the initiative to complile
+    Many thanks to Nick Sweeting for taking the initiative to compile
     a comprehensive list of domains that utilize Cloudflare.
 
     As this list is further updated, the included version may be brought
