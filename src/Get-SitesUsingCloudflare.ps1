@@ -14,47 +14,55 @@ function Get-SitesUsingCloudflare {
     all domains that use Cloudflare, not just the Cloudflare proxy
     (the affected service that leaked data).
 
-    This cmdlet consumes a simple string array of domains, and will work with
+    This command consumes a simple string array of domains, and will work with
     all major password manager export utilities.
 
     It is strongly suggested that any accounts on matched sites have their
     passwords updated.
 
-    DISCLAIMER: IF YOUR SOURCE DATA WAS EXPORTED FROM A PASSWORD MANAGER AND
-    INCLUDES PASSWORDS, SECURELY DISPOSE OF THE DATA AFTERWARDS.
+    DISCLAIMER: If your source data was exported from a password manager and
+    contains passwords, ensure the data is securely disposed of afterwards.
 .PARAMETER Name
-    Specifies the name of the array to be passed to the cmdlet. This may be
-    anything from a text file using Get-Content, to a .csv object created with
-    Import-Csv. Note that if your source data is represented as an object,
-    passing in the correct property (i.e. column) is required using the
-    $object.Property syntax. This property name varies between
-    password managers.
+    Specifies a string array to be passed to the command. This could be in
+    the form of a text file imported with Get-Content, or as objects created
+    with a command like ConvertFrom-Json or Import-Csv.
+
+    Note that if your source data is represented as objects, you will need to
+    explicitly pass in the property you want to use. The name of this property
+    varies between password managers.
 .EXAMPLE
-    Get-SitesUsingCloudflare -Name $array
-    Passing in an array, possibly from Get-Content.
+    PS C:\>
+        $content = Get-Content -Path $path
+        Get-SitesUsingCloudflare -Name $content
+
+        Passing in an array of sites using Get-Content.
 .EXAMPLE
-    Get-SitesUsingCloudflare -Name $csv.Name
-    Passing in the 'Name' property of a .csv object, from Import-Csv.
+    PS C:\>
+        $objects = Import-Csv -Path $path
+        Get-SitesUsingCloudflare -Name $objects.Name
+
+        Passing in the "Name" property of an array of objects, using Import-Csv.
 .INPUTS
     This command accepts an array of strings as input.
 .OUTPUTS
-    This command produces a List<PSObject> generic as output, however it's
-    intended use is as a pipeline input for a cmdlet such as Out-File or
-    Export-Csv.
+    This command produces a List<PSObject> generic as output.
 .LINK
     https://github.com/pirate/sites-using-cloudflare
 .LINK
-    https://en.wikipedia.org/wiki/Cloudbleed
+    https://blog.cloudflare.com/incident-report-on-memory-leak-caused-by-cloudflare-parser-bug/
 .LINK
     https://bugs.chromium.org/p/project-zero/issues/detail?id=1139
 .LINK
-    https://blog.cloudflare.com/incident-report-on-memory-leak-caused-by-cloudflare-parser-bug/
+    https://en.wikipedia.org/wiki/Cloudbleed
 .NOTES
-    Many thanks to Nick Sweeting for taking the initiative to compile
-    a comprehensive list of domains that utilize Cloudflare.
+    Many thanks to Nick Sweeting (pirate) for taking the initiative
+    to compile a comprehensive list of domains that utilize Cloudflare.
 
     As this list is further updated, the included version may be brought
     up to date by running "git submodule update --remote --merge".
+
+    Note that this list is no longer being maintained, and should be considered
+    as an archived resource.
 #>
     [CmdletBinding()]
     [OutputType([List[PSObject]])]
