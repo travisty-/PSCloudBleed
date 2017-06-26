@@ -65,7 +65,7 @@ function Get-SitesUsingCloudflare {
     as an archived resource.
 #>
     [CmdletBinding()]
-    [OutputType([List[PSObject]])]
+    [OutputType('System.Collections.Generic.List[PSObject]')]
 
     param(
         [Parameter(Mandatory,
