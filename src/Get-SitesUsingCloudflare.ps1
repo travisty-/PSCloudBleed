@@ -82,11 +82,11 @@ function Get-SitesUsingCloudflare {
 
         if (-not(Test-Path -Path $file)) {
             throw [FileNotFoundException] 'Source file not found. Ensure "sorted_unique_cf.txt" is located in "PSCloudBleed\lib\sites-using-cloudflare".'
-        } #if
+        }
 
         Write-Verbose -Message 'Source file found. Initializing file reader...'
         $sites = [File]::ReadLines($file)
-    } #begin
+    }
 
     process {
         Write-Verbose -Message 'Enumerating source file content...'
@@ -99,10 +99,10 @@ function Get-SitesUsingCloudflare {
                 }
 
                 [void] $results.Add($siteObject)
-            } #if
-        } #foreach
+            }
+        }
 
         Write-Verbose -Message 'Source file enumeration complete! Returning results...'
         return $results
-    } #process
-} #function
+    }
+}
